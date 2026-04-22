@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explain My Code - AI-powered code explanation tool for beginners. Paste your code and get instant, beginner-friendly explanations.">
+    <title>Explain My Code — AI Code Explainer</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Highlight.js for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- Marked.js for markdown rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated background orbs -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="app-header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">🧠</span>
+                <h1>Explain My Code</h1>
+            </div>
+            <p class="tagline">AI-powered code explanations for everyone</p>
+        </div>
+    </header>
+
+    <!-- Main App -->
+    <main id="app-main">
+        <!-- Mode Selector Tabs -->
+        <section class="mode-selector" id="mode-selector">
+            <button class="mode-tab active" data-mode="explain" id="tab-explain">
+                <span class="tab-icon">💡</span>
+                <span class="tab-label">Explain</span>
+            </button>
+            <button class="mode-tab" data-mode="eli5" id="tab-eli5">
+                <span class="tab-icon">👶</span>
+                <span class="tab-label">ELI5</span>
+            </button>
+            <button class="mode-tab" data-mode="line-by-line" id="tab-line-by-line">
+                <span class="tab-icon">📝</span>
+                <span class="tab-label">Line-by-Line</span>
+            </button>
+            <button class="mode-tab" data-mode="concepts" id="tab-concepts">
+                <span class="tab-icon">🔑</span>
+                <span class="tab-label">Key Concepts</span>
+            </button>
+            <button class="mode-tab" data-mode="error" id="tab-error">
+                <span class="tab-icon">❌</span>
+                <span class="tab-label">Error Mode</span>
+            </button>
+        </section>
+
+        <!-- Mode Description -->
+        <div class="mode-description" id="mode-description">
+            <p id="mode-desc-text">Paste your code and get a clear, beginner-friendly explanation.</p>
+        </div>
+
+        <!-- Input Section -->
+        <section class="input-section glass-card" id="input-section">
+            <div class="input-header">
+                <h2 id="input-title">📋 Paste Your Code</h2>
+                <div class="input-actions">
+                    <select id="language-select" aria-label="Select programming language">
+                        <option value="auto">🔍 Auto-detect</option>
+                        <option value="python">🐍 Python</option>
+                        <option value="javascript">⚡ JavaScript</option>
+                        <option value="java">☕ Java</option>
+                        <option value="c++">⚙️ C++</option>
+                        <option value="c">🔧 C</option>
+                        <option value="csharp">🎯 C#</option>
+                        <option value="html">🌐 HTML</option>
+                        <option value="css">🎨 CSS</option>
+                        <option value="sql">🗃️ SQL</option>
+                        <option value="php">🐘 PHP</option>
+                        <option value="ruby">💎 Ruby</option>
+                        <option value="go">🐹 Go</option>
+                        <option value="rust">🦀 Rust</option>
+                        <option value="typescript">📘 TypeScript</option>
+                    </select>
+                    <button class="btn-icon" id="btn-clear" title="Clear code" aria-label="Clear code input">
+                        🗑️
+                    </button>
+                </div>
+            </div>
+            <div class="code-input-wrapper">
+                <textarea 
+                    id="code-input" 
+                    placeholder="// Paste your code here...&#10;// or paste an error message in Error Mode&#10;&#10;function greet(name) {&#10;  return 'Hello, ' + name + '!';&#10;}"
+                    spellcheck="false"
+                    aria-label="Code input area"
+                ></textarea>
+            </div>
+            <div class="input-footer">
+                <div class="char-count">
+                    <span id="char-count">0</span> characters
+                </div>
+                <button class="btn-explain" id="btn-explain">
+                    <span class="btn-text">🚀 Explain</span>
+                    <span class="btn-loading" style="display:none;">
+                        <span class="spinner"></span> Thinking...
+                    </span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Example Snippets -->
+        <section class="examples-section" id="examples-section">
+            <p class="examples-label">Try an example:</p>
+            <div class="example-chips">
+                <button class="example-chip" data-example="python-loop" id="example-python">🐍 Python Loop</button>
+                <button class="example-chip" data-example="js-fetch" id="example-js">⚡ JS Fetch API</button>
+                <button class="example-chip" data-example="java-class" id="example-java">☕ Java Class</button>
+                <button class="example-chip" data-example="error-msg" id="example-error">❌ Sample Error</button>
+            </div>
+        </section>
+
+        <!-- Output Section -->
+        <section class="output-section glass-card" id="output-section" style="display:none;">
+            <div class="output-header">
+                <h2 id="output-title">✨ Explanation</h2>
+                <div class="output-actions">
+                    <button class="btn-icon" id="btn-copy" title="Copy explanation" aria-label="Copy explanation">
+                        📋
+                    </button>
+                </div>
+            </div>
+            <div class="output-content" id="output-content">
+                <!-- AI response rendered here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- API Key Modal -->
+    <div class="modal-overlay" id="api-key-modal" style="display:none;">
+        <div class="modal glass-card">
+            <h2>🔑 Enter Your Groq API Key</h2>
+            <p>Get your free API key from <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a></p>
+            <input 
+                type="password" 
+                id="api-key-input" 
+                placeholder="Paste your API key here..."
+                aria-label="Gemini API Key"
+            >
+            <div class="modal-actions">
+                <button class="btn-save-key" id="btn-save-key">💾 Save & Continue</button>
+            </div>
+            <p class="key-note">🔒 Key is stored locally in your browser only</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="app-footer">
+        <p>Built with ❤️ | Powered by <strong>Groq AI (Llama 3.3)</strong></p>
+    </footer>
+
+    <!-- App Script -->
+    <script src="app.js"></script>
+</body>
+</html>

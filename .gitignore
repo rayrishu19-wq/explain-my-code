@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Test files
+test_*.js
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
