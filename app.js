@@ -5,7 +5,13 @@
 
 // ============ CONFIG ============
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+
+/**
+ * Using Llama 3.3 70B via Groq for high performance and speed.
+ * This model is excellent for coding explanations and logic reasoning.
+ */
 const GROQ_MODEL = 'llama-3.3-70b-versatile';
+
 
 // ============ DOM ELEMENTS ============
 const elements = {
