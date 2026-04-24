@@ -59,6 +59,12 @@ explain-my-code/
 
 The app uses **Groq API** (free tier). Your API key is stored locally in your browser's localStorage — it never leaves your device.
 
+### ⚡ Why Groq?
+- **Speed:** Near-instant responses (sub-second generation).
+- **Cost:** Free tier allows generous usage without credits.
+- **Privacy:** Key stays in your browser.
+
+
 ## 📸 Supported Languages
 
 Python • JavaScript • Java • C++ • C • C# • HTML • CSS • SQL • PHP • Ruby • Go • Rust • TypeScript
