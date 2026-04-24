@@ -29,7 +29,9 @@ const elements = {
     // Tabs
     modeTabs: document.querySelectorAll('.mode-tab'),
     exampleChips: document.querySelectorAll('.example-chip'),
+    btnResetApi: document.getElementById('btn-reset-api'),
 };
+
 
 // ============ STATE ============
 let currentMode = 'explain';
@@ -278,7 +280,18 @@ function setupEventListeners() {
             handleExplain();
         }
     });
+
+    // Reset API Key
+    if (elements.btnResetApi) {
+        elements.btnResetApi.addEventListener('click', () => {
+            localStorage.removeItem('groq_api_key');
+            apiKey = '';
+            showApiKeyModal();
+            showToast('🔑 API key reset');
+        });
+    }
 }
+
 
 // ============ MODE SWITCHING ============
 function switchMode(mode) {
