@@ -23,6 +23,7 @@ const elements = {
     outputContent: document.getElementById('output-content'),
     outputTitle: document.getElementById('output-title'),
     charCount: document.getElementById('char-count'),
+    wordCount: document.getElementById('word-count'),
     languageSelect: document.getElementById('language-select'),
     inputTitle: document.getElementById('input-title'),
     modeDescText: document.getElementById('mode-desc-text'),
@@ -503,7 +504,14 @@ function setLoading(loading) {
 }
 
 function updateCharCount() {
+    const text = elements.codeInput.value.trim();
     elements.charCount.textContent = elements.codeInput.value.length;
+    
+    // Count words: split by whitespace and filter out empty strings
+    const words = text ? text.split(/\s+/).length : 0;
+    if (elements.wordCount) {
+        elements.wordCount.textContent = words;
+    }
 }
 
 function showToast(message) {
