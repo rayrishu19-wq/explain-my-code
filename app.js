@@ -43,7 +43,12 @@ const elements = {
 // ============ STATE ============
 let currentMode = 'explain';
 let isLoading = false;
-let apiKey = localStorage.getItem('groq_api_key') || '';
+let apiKey = '';
+try {
+    apiKey = localStorage.getItem('groq_api_key') || '';
+} catch (e) {
+    console.error('LocalStorage access denied:', e);
+}
 
 // ============ MODE CONFIGS ============
 const modeConfigs = {
