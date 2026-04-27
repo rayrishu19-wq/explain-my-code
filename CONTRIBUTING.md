@@ -92,6 +92,9 @@ refactor: extract API call logic into separate module
 chore: update highlight.js version
 ```
 
+### ⚛️ Atomic Commits
+Try to keep your commits **atomic** (one small, focused change per commit). This makes it easier to review and track the history of the project.
+
 ## 🎨 Coding Standards
 
 ### HTML
