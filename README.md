@@ -36,6 +36,12 @@ An AI-powered web app that explains code in beginner-friendly language. Just pas
 - 📱 **Fully responsive** — works on mobile
 - ⌨️ **Keyboard shortcut** — Ctrl+Enter to explain
 
+## 💡 Pro Tips
+
+- **Auto-detect:** Most of the time, leaving it on "Auto-detect" works great!
+- **Error Mode:** When pasting errors, include a bit of the surrounding code for even better advice.
+- **Copy:** Click the 📋 icon on the top right of the explanation to copy it instantly.
+
 ## 🛠️ Tech Stack
 
 - **HTML5** — Structure
