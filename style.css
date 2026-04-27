@@ -489,7 +489,8 @@ body {
     background: rgba(6, 214, 160, 0.1);
     border-color: rgba(6, 214, 160, 0.3);
     color: var(--accent-cyan);
-    transform: translateY(-1px);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 4px 15px rgba(6, 214, 160, 0.15);
 }
 
 /* --- Output Section --- */
