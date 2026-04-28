@@ -240,6 +240,12 @@ ZeroDivisionError: division by zero`,
 };
 
 // ============ INITIALIZATION ============
+/**
+ * Initializes the application.
+ * Checks for a saved Groq API key in localStorage.
+ * Sets up all necessary DOM event listeners.
+ * Performs the initial character count for the code input.
+ */
 function init() {
     // Check for API key
     if (!apiKey) {
@@ -253,6 +259,11 @@ function init() {
     updateCharCount();
 }
 
+/**
+ * Attaches event listeners to all interactive DOM elements.
+ * Handles mode switching, API calls, clearing input, copying results,
+ * character counting, example loading, and keyboard shortcuts.
+ */
 function setupEventListeners() {
     // Mode tabs
     elements.modeTabs.forEach(tab => {
@@ -306,6 +317,13 @@ function setupEventListeners() {
 
 
 // ============ MODE SWITCHING ============
+/**
+ * Switches the active explanation mode.
+ * Updates the UI tabs, title, description, and placeholder text
+ * based on the selected mode (e.g., 'explain', 'eli5', 'error').
+ * 
+ * @param {string} mode - The mode identifier to switch to.
+ */
 function switchMode(mode) {
     currentMode = mode;
 
@@ -328,6 +346,12 @@ function switchMode(mode) {
 }
 
 // ============ EXAMPLE LOADING ============
+/**
+ * Loads a predefined code example into the input area.
+ * Automatically switches the mode if an error example is selected.
+ * 
+ * @param {string} exampleKey - The key identifying the example to load.
+ */
 function loadExample(exampleKey) {
     const example = examples[exampleKey];
     if (!example) return;
@@ -356,6 +380,13 @@ function loadExample(exampleKey) {
 }
 
 // ============ MAIN EXPLAIN HANDLER ============
+/**
+ * Main handler for the "Explain" button click.
+ * Validates the input and API key, determines the selected programming language,
+ * constructs the appropriate prompt based on the current mode, and
+ * makes an asynchronous call to the Groq API to retrieve the explanation.
+ * It also handles UI loading states and errors.
+ */
 async function handleExplain() {
     const code = elements.codeInput.value.trim();
 
@@ -415,6 +446,14 @@ async function handleExplain() {
 }
 
 // ============ GROQ API CALL ============
+/**
+ * Makes an asynchronous POST request to the Groq API.
+ * Uses the Llama 3.3 model to generate code explanations.
+ * 
+ * @param {string} prompt - The formatted prompt string to send to the AI model.
+ * @returns {Promise<string>} A promise that resolves to the generated explanation text.
+ * @throws {Error} Throws an error if the API request fails (e.g., invalid key, rate limit).
+ */
 async function callGroqAPI(prompt) {
     const response = await fetch(GROQ_API_URL, {
         method: 'POST',
@@ -464,6 +503,13 @@ async function callGroqAPI(prompt) {
 }
 
 // ============ RENDERING ============
+/**
+ * Parses and renders Markdown text into HTML.
+ * Uses Marked.js for markdown parsing and highlight.js for syntax highlighting
+ * within code blocks. Safely injects the parsed HTML into the output section.
+ * 
+ * @param {string} markdownText - The raw markdown text from the AI response.
+ */
 function renderOutput(markdownText) {
     elements.outputSection.style.display = 'block';
 
@@ -492,12 +538,25 @@ function renderOutput(markdownText) {
     elements.outputSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+/**
+ * Displays the output section with the provided content.
+ * Used primarily to show loading states or fallback messages before the
+ * markdown is fully rendered.
+ * 
+ * @param {string} [content] - Optional HTML content to display.
+ */
 function showOutput(content) {
     elements.outputSection.style.display = 'block';
     elements.outputContent.innerHTML = content || '<p style="color: var(--text-muted); text-align: center;"><span class="spinner"></span> Thinking... this may take a few seconds</p>';
 }
 
 // ============ UI HELPERS ============
+/**
+ * Toggles the UI loading state.
+ * Disables the explain button and shows a loading spinner during API calls.
+ * 
+ * @param {boolean} loading - True to show loading state, false to hide it.
+ */
 function setLoading(loading) {
     isLoading = loading;
     const btnText = elements.btnExplain.querySelector('.btn-text');
@@ -508,6 +567,10 @@ function setLoading(loading) {
     btnLoading.style.display = loading ? 'inline-flex' : 'none';
 }
 
+/**
+ * Updates the character and word count display based on the current code input.
+ * Triggered on every input event in the code textarea.
+ */
 function updateCharCount() {
     const text = elements.codeInput.value.trim();
     elements.charCount.textContent = elements.codeInput.value.length;
@@ -519,6 +582,12 @@ function updateCharCount() {
     }
 }
 
+/**
+ * Displays a temporary toast notification message on the screen.
+ * The toast automatically disappears after 3 seconds.
+ * 
+ * @param {string} message - The text message to display in the toast.
+ */
 function showToast(message) {
     // Remove existing toast
     const existingToast = document.querySelector('.toast');
@@ -542,11 +611,19 @@ function showToast(message) {
 }
 
 // ============ API KEY MANAGEMENT ============
+/**
+ * Displays the modal dialogue prompting the user to enter their Groq API key.
+ * Automatically focuses the input field for convenience.
+ */
 function showApiKeyModal() {
     elements.apiKeyModal.style.display = 'flex';
     setTimeout(() => elements.apiKeyInput.focus(), 100);
 }
 
+/**
+ * Validates and saves the entered Groq API key to localStorage.
+ * Dismisses the modal and shows a success toast upon successful save.
+ */
 function saveApiKey() {
     const key = elements.apiKeyInput.value.trim();
 
@@ -562,6 +639,11 @@ function saveApiKey() {
 }
 
 // ============ COPY FUNCTIONALITY ============
+/**
+ * Copies the current explanation content to the user's clipboard.
+ * Uses the modern navigator.clipboard API with a fallback mechanism
+ * using document.execCommand('copy') for older browsers.
+ */
 function copyExplanation() {
     const text = elements.outputContent.innerText;
 
