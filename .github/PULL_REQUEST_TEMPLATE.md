@@ -39,6 +39,7 @@ Closes #
 - [ ] I have added comments where necessary
 - [ ] All existing features still work correctly
 - [ ] The UI is responsive and works on mobile
+- [ ] There are no console errors in the browser
 
 ## 🧪 Testing Done
 
