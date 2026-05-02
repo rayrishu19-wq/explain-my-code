@@ -13,6 +13,7 @@ An AI-powered web app that explains code in beginner-friendly language. Just pas
 | 📝 **Line-by-Line** | Every single line explained individually |
 | 🔑 **Key Concepts** | Highlights loops, functions, variables, conditionals |
 | ❌ **Error Mode** | Paste an error → get what went wrong & how to fix it |
+| 🎧 **Vibe Coding** | Optimized for the modern "Builder" workflow |
 
 ## 🚀 Quick Start
 
