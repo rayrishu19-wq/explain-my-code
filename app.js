@@ -250,15 +250,16 @@ ZeroDivisionError: division by zero`,
  * Performs the initial character count for the code input.
  */
 function init() {
-    // Check for API key
+    // Entry point of the application.
+    // Check for API key on startup. If not found, prompt the user.
     if (!apiKey) {
         showApiKeyModal();
     }
 
-    // Event listeners
+    // Bind all UI events to their listeners.
     setupEventListeners();
 
-    // Initial char count
+    // Initialize the character count display.
     updateCharCount();
 }
 
