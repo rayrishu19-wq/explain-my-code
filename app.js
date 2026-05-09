@@ -519,16 +519,18 @@ async function callGroqAPI(prompt) {
 function renderOutput(markdownText) {
     elements.outputSection.style.display = 'block';
 
-    // Configure marked for safe rendering
+    // Configure marked for safe rendering and syntax highlighting.
     marked.setOptions({
         highlight: function(code, lang) {
+            // If the language is detected and supported by highlight.js, use it.
             if (lang && hljs.getLanguage(lang)) {
                 return hljs.highlight(code, { language: lang }).value;
             }
+            // Otherwise, auto-detect the language.
             return hljs.highlightAuto(code).value;
         },
-        breaks: true,
-        gfm: true,
+        breaks: true, // Convert \n to <br>
+        gfm: true,    // Enable GitHub Flavored Markdown
     });
 
     // Render markdown to HTML
