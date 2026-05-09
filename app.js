@@ -41,8 +41,11 @@ const elements = {
 
 
 // ============ STATE ============
+// 'currentMode' holds the identifier of the active tab (e.g., 'explain', 'eli5', 'error').
 let currentMode = 'explain';
+// 'isLoading' is a boolean flag to track if an API request is currently in progress.
 let isLoading = false;
+// 'apiKey' stores the user's Groq API key retrieved from local storage.
 let apiKey = '';
 try {
     apiKey = localStorage.getItem('groq_api_key') || '';
@@ -247,15 +250,16 @@ ZeroDivisionError: division by zero`,
  * Performs the initial character count for the code input.
  */
 function init() {
-    // Check for API key
+    // Entry point of the application.
+    // Check for API key on startup. If not found, prompt the user.
     if (!apiKey) {
         showApiKeyModal();
     }
 
-    // Event listeners
+    // Bind all UI events to their listeners.
     setupEventListeners();
 
-    // Initial char count
+    // Initialize the character count display.
     updateCharCount();
 }
 
@@ -465,10 +469,12 @@ async function callGroqAPI(prompt) {
             model: GROQ_MODEL,
             messages: [
                 {
+                    // System message sets the behavior and persona of the AI.
                     role: 'system',
                     content: 'You are a helpful coding teacher who explains code in a clear, beginner-friendly way. Always use markdown formatting in your responses.'
                 },
                 {
+                    // User message contains the actual prompt constructed based on the mode.
                     role: 'user',
                     content: prompt
                 }
@@ -513,16 +519,18 @@ async function callGroqAPI(prompt) {
 function renderOutput(markdownText) {
     elements.outputSection.style.display = 'block';
 
-    // Configure marked for safe rendering
+    // Configure marked for safe rendering and syntax highlighting.
     marked.setOptions({
         highlight: function(code, lang) {
+            // If the language is detected and supported by highlight.js, use it.
             if (lang && hljs.getLanguage(lang)) {
                 return hljs.highlight(code, { language: lang }).value;
             }
+            // Otherwise, auto-detect the language.
             return hljs.highlightAuto(code).value;
         },
-        breaks: true,
-        gfm: true,
+        breaks: true, // Convert \n to <br>
+        gfm: true,    // Enable GitHub Flavored Markdown
     });
 
     // Render markdown to HTML
