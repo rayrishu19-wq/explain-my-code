@@ -469,10 +469,12 @@ async function callGroqAPI(prompt) {
             model: GROQ_MODEL,
             messages: [
                 {
+                    // System message sets the behavior and persona of the AI.
                     role: 'system',
                     content: 'You are a helpful coding teacher who explains code in a clear, beginner-friendly way. Always use markdown formatting in your responses.'
                 },
                 {
+                    // User message contains the actual prompt constructed based on the mode.
                     role: 'user',
                     content: prompt
                 }
