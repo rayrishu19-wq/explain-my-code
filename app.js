@@ -41,8 +41,11 @@ const elements = {
 
 
 // ============ STATE ============
+// 'currentMode' holds the identifier of the active tab (e.g., 'explain', 'eli5', 'error').
 let currentMode = 'explain';
+// 'isLoading' is a boolean flag to track if an API request is currently in progress.
 let isLoading = false;
+// 'apiKey' stores the user's Groq API key retrieved from local storage.
 let apiKey = '';
 try {
     apiKey = localStorage.getItem('groq_api_key') || '';
