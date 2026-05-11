@@ -239,6 +239,14 @@ getUser(42);`,
     return sum(numbers) / len(numbers)
 ZeroDivisionError: division by zero`,
         lang: 'auto'
+    },
+    'cpp-template': {
+        code: `// A simple C++ template function
+template <typename T>
+T max(T a, T b) {
+    return (a > b) ? a : b;
+}`,
+        lang: 'cpp'
     }
 };
 
