@@ -593,7 +593,16 @@ function setLoading(loading) {
  */
 function updateCharCount() {
     const text = elements.codeInput.value.trim();
-    elements.charCount.textContent = elements.codeInput.value.length;
+    const length = elements.codeInput.value.length;
+    elements.charCount.textContent = length;
+    
+    // Add character limit warning
+    if (length > 5000) {
+        elements.charCount.style.color = 'var(--accent-red)';
+        elements.charCount.textContent = length + ' (Exceeds recommended limit!)';
+    } else {
+        elements.charCount.style.color = 'inherit';
+    }
     
     // Count words: split by whitespace and filter out empty strings
     const words = text ? text.split(/\s+/).length : 0;
