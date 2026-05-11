@@ -277,46 +277,33 @@ function init() {
  * character counting, example loading, and keyboard shortcuts.
  */
 function setupEventListeners() {
-    // Mode tabs
+    setupModeListeners();
+    setupActionListeners();
+    setupInputListeners();
+    setupModalListeners();
+}
+
+function setupModeListeners() {
     elements.modeTabs.forEach(tab => {
         tab.addEventListener('click', () => switchMode(tab.dataset.mode));
     });
 
-    // Explain button
+    elements.exampleChips.forEach(chip => {
+        chip.addEventListener('click', () => loadExample(chip.dataset.example));
+    });
+}
+
+function setupActionListeners() {
     elements.btnExplain.addEventListener('click', handleExplain);
 
-    // Clear button
     elements.btnClear.addEventListener('click', () => {
         elements.codeInput.value = '';
         updateCharCount();
         elements.codeInput.focus();
     });
 
-    // Copy button
     elements.btnCopy.addEventListener('click', copyExplanation);
 
-    // Character count
-    elements.codeInput.addEventListener('input', updateCharCount);
-
-    // Example chips
-    elements.exampleChips.forEach(chip => {
-        chip.addEventListener('click', () => loadExample(chip.dataset.example));
-    });
-
-    // API key modal
-    elements.btnSaveKey.addEventListener('click', saveApiKey);
-    elements.apiKeyInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') saveApiKey();
-    });
-
-    // Keyboard shortcut: Ctrl+Enter to explain
-    elements.codeInput.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-            handleExplain();
-        }
-    });
-
-    // Reset API Key
     if (elements.btnResetApi) {
         elements.btnResetApi.addEventListener('click', () => {
             localStorage.removeItem('groq_api_key');
@@ -325,6 +312,23 @@ function setupEventListeners() {
             showToast('🔑 API key reset');
         });
     }
+}
+
+function setupInputListeners() {
+    elements.codeInput.addEventListener('input', updateCharCount);
+
+    elements.codeInput.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            handleExplain();
+        }
+    });
+}
+
+function setupModalListeners() {
+    elements.btnSaveKey.addEventListener('click', saveApiKey);
+    elements.apiKeyInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') saveApiKey();
+    });
 }
 
 
