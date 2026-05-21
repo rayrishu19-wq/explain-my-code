@@ -247,6 +247,18 @@ T max(T a, T b) {
     return (a > b) ? a : b;
 }`,
         lang: 'cpp'
+    },
+    'bash-script': {
+        code: `#!/bin/bash
+# Check if directory exists
+DIR="/var/log"
+if [ -d "$DIR" ]; then
+    echo "Directory $DIR exists."
+    ls -la "$DIR" | head -n 5
+else
+    echo "Directory $DIR does not exist."
+fi`,
+        lang: 'bash'
     }
 };
 
