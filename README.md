@@ -74,7 +74,7 @@ The app uses **Groq API** (free tier). Your API key is stored locally in your br
 
 ## 📸 Supported Languages
 
-Python • JavaScript • Java • C++ • C • C# • HTML • CSS • SQL • PHP • Ruby • Go • Rust • TypeScript
+Python • JavaScript • Java • C++ • C • C# • HTML • CSS • SQL • PHP • Ruby • Go • Rust • TypeScript • Swift • Kotlin • Bash
 
 ## 📝 License
 
