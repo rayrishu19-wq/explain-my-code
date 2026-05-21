@@ -688,9 +688,16 @@ function saveApiKey() {
 function copyExplanation() {
     const text = elements.outputContent.innerText;
 
-    navigator.clipboard.writeText(text).then(() => {
+    const setCopySuccess = () => {
         showToast('📋 Explanation copied!');
-    }).catch(() => {
+        const originalContent = elements.btnCopy.textContent;
+        elements.btnCopy.textContent = '✅';
+        setTimeout(() => {
+            elements.btnCopy.textContent = originalContent;
+        }, 2000);
+    };
+
+    navigator.clipboard.writeText(text).then(setCopySuccess).catch(() => {
         // Fallback
         const textarea = document.createElement('textarea');
         textarea.value = text;
@@ -698,7 +705,7 @@ function copyExplanation() {
         textarea.select();
         document.execCommand('copy');
         textarea.remove();
-        showToast('📋 Explanation copied!');
+        setCopySuccess();
     });
 }
 
