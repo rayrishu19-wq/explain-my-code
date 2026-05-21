@@ -281,6 +281,12 @@ function init() {
 
     // Initialize the character count display.
     updateCharCount();
+
+    // Set the current year in the footer.
+    const yearEl = document.getElementById('current-year');
+    if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+    }
 }
 
 /**
