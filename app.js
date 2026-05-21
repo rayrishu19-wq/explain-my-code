@@ -309,9 +309,16 @@ function setupActionListeners() {
     elements.btnExplain.addEventListener('click', handleExplain);
 
     elements.btnClear.addEventListener('click', () => {
-        elements.codeInput.value = '';
-        updateCharCount();
-        elements.codeInput.focus();
+        if (elements.codeInput.value.trim() !== '') {
+            if (confirm('Are you sure you want to clear the code input?')) {
+                elements.codeInput.value = '';
+                updateCharCount();
+                elements.codeInput.focus();
+                showToast('🗑️ Input cleared');
+            }
+        } else {
+            elements.codeInput.focus();
+        }
     });
 
     elements.btnCopy.addEventListener('click', copyExplanation);
