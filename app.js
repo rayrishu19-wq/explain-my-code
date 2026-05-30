@@ -346,6 +346,11 @@ function setupInputListeners() {
         if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
             handleExplain();
         }
+        // Alt + C keyboard shortcut to clear the code input
+        if (e.altKey && e.key.toLowerCase() === 'c') {
+            e.preventDefault();
+            elements.btnClear.click();
+        }
     });
 }
 
