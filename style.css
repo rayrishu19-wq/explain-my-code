@@ -387,6 +387,13 @@ body {
     font-family: var(--font-mono);
 }
 
+#char-count.exceeded {
+    color: var(--accent-red);
+    font-weight: 600;
+    text-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
+    transition: color var(--transition-fast);
+}
+
 /* --- Explain Button --- */
 .btn-explain {
     padding: 12px 32px;

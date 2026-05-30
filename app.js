@@ -633,10 +633,10 @@ function updateCharCount() {
     
     // Add character limit warning
     if (length > 5000) {
-        elements.charCount.style.color = 'var(--accent-red)';
+        elements.charCount.classList.add('exceeded');
         elements.charCount.textContent = length + ' (Exceeds recommended limit!)';
     } else {
-        elements.charCount.style.color = 'inherit';
+        elements.charCount.classList.remove('exceeded');
     }
     
     // Count words: split by whitespace and filter out empty strings
