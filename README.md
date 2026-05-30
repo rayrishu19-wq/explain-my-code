@@ -35,13 +35,14 @@ An AI-powered web app that explains code in beginner-friendly language. Just pas
 - ✨ **Animated background** with floating gradient orbs
 - 🎯 **Neon accent colors** (cyan, purple, green)
 - 📱 **Fully responsive** — works on mobile
-- ⌨️ **Keyboard shortcut** — Ctrl+Enter to explain
+- ⌨️ **Keyboard shortcuts** — `Ctrl+Enter` to explain, `Alt+C` to clear code input
 
 ## 💡 Pro Tips
 
 - **Auto-detect:** Most of the time, leaving it on "Auto-detect" works great!
 - **Error Mode:** When pasting errors, include a bit of the surrounding code for even better advice.
 - **Copy:** Click the 📋 icon on the top right of the explanation to copy it instantly.
+- **Download:** Click the 📥 icon on the top right of the explanation to download it as a Markdown (`.md`) file.
 
 ## 🛠️ Tech Stack
 
