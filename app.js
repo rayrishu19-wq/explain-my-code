@@ -19,6 +19,7 @@ const elements = {
     btnExplain: document.getElementById('btn-explain'),
     btnClear: document.getElementById('btn-clear'),
     btnCopy: document.getElementById('btn-copy'),
+    btnDownload: document.getElementById('btn-download'),
     outputSection: document.getElementById('output-section'),
     outputContent: document.getElementById('output-content'),
     outputTitle: document.getElementById('output-title'),
@@ -328,6 +329,10 @@ function setupActionListeners() {
     });
 
     elements.btnCopy.addEventListener('click', copyExplanation);
+
+    if (elements.btnDownload) {
+        elements.btnDownload.addEventListener('click', downloadExplanation);
+    }
 
     if (elements.btnResetApi) {
         elements.btnResetApi.addEventListener('click', () => {
@@ -725,6 +730,33 @@ function copyExplanation() {
         textarea.remove();
         setCopySuccess();
     });
+}
+
+// ============ DOWNLOAD FUNCTIONALITY ============
+/**
+ * Downloads the current explanation content as a Markdown (.md) file.
+ */
+function downloadExplanation() {
+    const text = elements.outputContent.innerText;
+    if (!text) {
+        showToast('⚠️ Nothing to download!');
+        return;
+    }
+
+    const blob = new Blob([text], { type: 'text/markdown;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    
+    // Generate filename based on current mode and date
+    const dateStr = new Date().toISOString().slice(0, 10);
+    link.href = url;
+    link.setAttribute('download', `explanation-${currentMode}-${dateStr}.md`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    
+    showToast('📥 Download started!');
 }
 
 // ============ START APP ============
