@@ -424,7 +424,9 @@ function switchMode(mode) {
 
     // Update active tab
     elements.modeTabs.forEach(tab => {
-        tab.classList.toggle('active', tab.dataset.mode === mode);
+        const isActive = tab.dataset.mode === mode;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
 
     // Update UI text

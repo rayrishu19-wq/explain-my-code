@@ -50,24 +50,24 @@
     <!-- Main App -->
     <main id="app-main">
         <!-- Mode Selector Tabs -->
-        <section class="mode-selector" id="mode-selector">
-            <button class="mode-tab active" data-mode="explain" id="tab-explain">
+        <section class="mode-selector" id="mode-selector" role="tablist" aria-label="Explanation modes">
+            <button class="mode-tab active" data-mode="explain" id="tab-explain" role="tab" aria-selected="true">
                 <span class="tab-icon">💡</span>
                 <span class="tab-label">Explain</span>
             </button>
-            <button class="mode-tab" data-mode="eli5" id="tab-eli5">
+            <button class="mode-tab" data-mode="eli5" id="tab-eli5" role="tab" aria-selected="false">
                 <span class="tab-icon">👶</span>
                 <span class="tab-label">ELI5</span>
             </button>
-            <button class="mode-tab" data-mode="line-by-line" id="tab-line-by-line">
+            <button class="mode-tab" data-mode="line-by-line" id="tab-line-by-line" role="tab" aria-selected="false">
                 <span class="tab-icon">📝</span>
                 <span class="tab-label">Line-by-Line</span>
             </button>
-            <button class="mode-tab" data-mode="concepts" id="tab-concepts">
+            <button class="mode-tab" data-mode="concepts" id="tab-concepts" role="tab" aria-selected="false">
                 <span class="tab-icon">🔑</span>
                 <span class="tab-label">Key Concepts</span>
             </button>
-            <button class="mode-tab" data-mode="error" id="tab-error">
+            <button class="mode-tab" data-mode="error" id="tab-error" role="tab" aria-selected="false">
                 <span class="tab-icon">❌</span>
                 <span class="tab-label">Error Mode</span>
             </button>
