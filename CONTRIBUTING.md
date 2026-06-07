@@ -81,6 +81,11 @@ chore/description      → Build/config updates
 - [ ] Verify **responsive design** on mobile viewport
 - [ ] Add **screenshots** for UI changes
 
+### 💡 Local Testing Tips
+- **Simulate Clean Install:** To test the API key modal prompt, use the "Reset API Key" link in the footer or clear local storage by running `localStorage.clear()` in the browser developer console.
+- **Responsive Testing:** Use the browser's responsive design mode (F12) to verify UI scaling down to mobile viewports (e.g., iPhone SE at 375px).
+- **Checking API Responses:** Inspect the browser Console and Network tabs if you encounter issues calling the Groq endpoint.
+
 ### Commit Message Format
 Use [Conventional Commits](https://www.conventionalcommits.org/):
 ```
