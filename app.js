@@ -232,6 +232,48 @@ getUser(42);`,
 }`,
         lang: 'java'
     },
+    'rust-enum': {
+        code: `// Define a Rust enum with associative data
+enum WebEvent {
+    PageLoad,
+    KeyPress(char),
+    Click { x: i64, y: i64 },
+}
+
+fn inspect_event(event: WebEvent) {
+    match event {
+        WebEvent::PageLoad => println!("page loaded"),
+        WebEvent::KeyPress(c) => println!("pressed key: {}", c),
+        WebEvent::Click { x, y } => {
+            println!("clicked at x={}, y={}", x, y);
+        }
+    }
+}`,
+        lang: 'rust'
+    },
+    'go-routine': {
+        code: `package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func worker(id int) {
+    fmt.Printf("Worker %d starting\\n", id)
+    time.Sleep(time.Second)
+    fmt.Printf("Worker %d done\\n", id)
+}
+
+func main() {
+    go worker(1)
+    go worker(2)
+    
+    // Wait for goroutines to finish
+    time.Sleep(2 * time.Second)
+}`,
+        lang: 'go'
+    },
     'error-msg': {
         code: `Traceback (most recent call last):
   File "app.py", line 15, in <module>
