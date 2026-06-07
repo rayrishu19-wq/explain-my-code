@@ -77,6 +77,12 @@ The app uses **Groq API** (free tier). Your API key is stored locally in your br
 
 Python • JavaScript • Java • C++ • C • C# • HTML • CSS • SQL • PHP • Ruby • Go • Rust • TypeScript • Swift • Kotlin • Bash • Dart • R • Haskell
 
+## 🔍 Troubleshooting
+
+- **Invalid API Key (401):** Double-check that your API key is correct. You can reset it using the "Reset API Key" link in the footer.
+- **Rate Limit Exceeded (429):** The free tier of Groq has limits. If you hit this, wait 30-60 seconds before trying again.
+- **Local Storage Access:** The app stores your API key locally in your browser. Ensure your browser allows local storage/cookies for local files.
+
 ## 📝 License
 
 MIT License — feel free to use, modify, and share!
