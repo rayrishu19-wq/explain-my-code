@@ -64,6 +64,13 @@ body {
     position: relative;
 }
 
+/* Accessibility Focus Indicator */
+*:focus-visible {
+    outline: 2px solid var(--accent-purple);
+    outline-offset: 3px;
+}
+
+
 /* --- Animated Background Orbs --- */
 .bg-orbs {
     position: fixed;
