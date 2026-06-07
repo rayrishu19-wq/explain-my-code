@@ -913,21 +913,29 @@ body {
 
 /* --- Scrollbar --- */
 ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
 
+::-webkit-scrollbar-thumb {
+    background: rgba(6, 214, 160, 0.25);
+    border-radius: 10px;
+    border: 1px solid rgba(6, 214, 160, 0.1);
+}
+
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(6, 214, 160, 0.45);
+}
+
+/* Firefox support for custom scrollbars */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(6, 214, 160, 0.25) rgba(0, 0, 0, 0.2);
 }
 
 /* --- Selection Color --- */
