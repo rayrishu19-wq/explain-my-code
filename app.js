@@ -378,10 +378,12 @@ function setupActionListeners() {
 
     if (elements.btnResetApi) {
         elements.btnResetApi.addEventListener('click', () => {
-            localStorage.removeItem('groq_api_key');
-            apiKey = '';
-            showApiKeyModal();
-            showToast('🔑 API key reset');
+            if (confirm('Are you sure you want to reset and delete your stored API key?')) {
+                localStorage.removeItem('groq_api_key');
+                apiKey = '';
+                showApiKeyModal();
+                showToast('🔑 API key reset');
+            }
         });
     }
 }
