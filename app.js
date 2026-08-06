@@ -484,6 +484,16 @@ function loadExample(exampleKey) {
  * makes an asynchronous call to the Groq API to retrieve the explanation.
  * It also handles UI loading states and errors.
  */
+function getCacheKey(code, mode, lang) {
+    const str = `${mode}_${lang}_${code}`;
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = (hash << 5) - hash + str.charCodeAt(i);
+        hash |= 0;
+    }
+    return 'cache_' + hash;
+}
+
 async function handleExplain() {
     const code = elements.codeInput.value.trim();
 
@@ -502,18 +512,46 @@ async function handleExplain() {
     let lang = elements.languageSelect.value;
     if (lang === 'auto') lang = 'the detected programming language';
 
-    // Build prompt
+    // Check cache
+    const cacheKey = getCacheKey(code, currentMode, lang);
+    let cache = {};
+    try {
+        cache = JSON.parse(localStorage.getItem('explain_my_code_cache') || '{}');
+    } catch (e) {
+        console.error('Failed to parse cache:', e);
+    }
+
     const config = modeConfigs[currentMode];
+    elements.outputTitle.textContent = config.outputTitle;
+
+    if (cache[cacheKey]) {
+        showToast('⚡ Loaded from cache!');
+        renderOutput(cache[cacheKey]);
+        return;
+    }
+
+    // Build prompt
     const prompt = config.prompt(code, lang);
 
     // UI loading state
     setLoading(true);
     showOutput('');
-    elements.outputTitle.textContent = config.outputTitle;
 
     try {
         const response = await callGroqAPI(prompt);
         const explanation = response;
+
+        // Save to cache
+        try {
+            cache[cacheKey] = explanation;
+            const keys = Object.keys(cache);
+            if (keys.length > 25) {
+                delete cache[keys[0]];
+            }
+            localStorage.setItem('explain_my_code_cache', JSON.stringify(cache));
+        } catch (e) {
+            console.error('Failed to save to cache:', e);
+        }
 
         // Render the output with markdown
         renderOutput(explanation);
