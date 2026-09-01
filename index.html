@@ -9,7 +9,7 @@
     <meta property="og:title" content="Explain My Code — AI Code Explainer">
     <meta property="og:description" content="AI-powered code explanation tool for beginners. Paste your code and get instant, beginner-friendly explanations.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://explain-my-code.vercel.app">
+    <meta property="og:url" content="https://rayrishu19-wq.github.io/explain-my-code/">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
 
 
@@ -44,6 +44,12 @@
                 <h1>Explain My Code</h1>
             </div>
             <p class="tagline">AI-powered code explanations for everyone</p>
+            <div class="header-status-wrapper">
+                <button class="api-status-btn" id="btn-status" title="Configure Groq AI key or switch mode">
+                    <span class="status-dot"></span>
+                    <span class="status-text" id="status-text">⚡ Instant Demo Mode (Click for Custom Groq AI)</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -169,18 +175,20 @@
     <!-- API Key Modal Dialog -->
     <div class="modal-overlay" id="api-key-modal" style="display:none;">
         <div class="modal glass-card">
+            <button class="modal-close-btn" id="btn-close-modal" aria-label="Close modal">✕</button>
             <h2>🔑 Enter Your Groq API Key</h2>
-            <p>Get your free API key from <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a></p>
+            <p class="modal-sub">To explain your own custom code with live AI (Llama 3.3 70B), paste your free API key from <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a></p>
             <input 
                 type="password" 
                 id="api-key-input" 
-                placeholder="Paste your API key here..."
+                placeholder="gsk_..."
                 aria-label="Groq API Key"
             >
             <div class="modal-actions">
-                <button class="btn-save-key" id="btn-save-key">💾 Save & Continue</button>
+                <button class="btn-save-key" id="btn-save-key">💾 Save & Activate Live AI</button>
+                <button class="btn-demo-mode" id="btn-try-demo">⚡ Explore in Demo Mode First</button>
             </div>
-            <p class="key-note">🔒 Key is stored locally in your browser only</p>
+            <p class="key-note">🔒 Key is stored only in your browser's localStorage. Never sent to any third party.</p>
         </div>
     </div>
 

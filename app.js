@@ -1,6 +1,6 @@
 /* ========================================
    EXPLAIN MY CODE — App Logic
-   Groq API Integration (Free & Fast!)
+   Groq API Integration (Free & Fast!) + Instant Demo Mode
    ======================================== */
 
 // ============ CONFIG ============
@@ -29,10 +29,14 @@ const elements = {
     inputTitle: document.getElementById('input-title'),
     modeDescText: document.getElementById('mode-desc-text'),
 
-    // Modal
+    // Modal & Status Elements
     apiKeyModal: document.getElementById('api-key-modal'),
     apiKeyInput: document.getElementById('api-key-input'),
     btnSaveKey: document.getElementById('btn-save-key'),
+    btnCloseModal: document.getElementById('btn-close-modal'),
+    btnTryDemo: document.getElementById('btn-try-demo'),
+    btnStatus: document.getElementById('btn-status'),
+    statusText: document.getElementById('status-text'),
 
     // Tabs
     modeTabs: document.querySelectorAll('.mode-tab'),
@@ -260,9 +264,9 @@ import (
 )
 
 func worker(id int) {
-    fmt.Printf("Worker %d starting\\n", id)
+    fmt.Printf("Worker %d starting\n", id)
     time.Sleep(time.Second)
-    fmt.Printf("Worker %d done\\n", id)
+    fmt.Printf("Worker %d done\n", id)
 }
 
 func main() {
@@ -289,7 +293,7 @@ template <typename T>
 T max(T a, T b) {
     return (a > b) ? a : b;
 }`,
-        lang: 'cpp'
+        lang: 'c++'
     },
     'bash-script': {
         code: `#!/bin/bash
@@ -305,25 +309,356 @@ fi`,
     }
 };
 
+// ============ BUILT-IN DEMO EXPLANATIONS (Zero API Key Needed for Visitors) ============
+const DEMO_EXPLANATIONS = {
+    'python-loop': {
+        explain: `### 📋 Summary
+This Python script calculates the sum of all integers from 1 up to 10 (which equals **55**) using a \`for\` loop and prints the running total at each iteration.
+
+---
+
+### 🔍 How It Works Step-by-Step
+
+1. **\`total = 0\`**: Initializes an accumulator variable named \`total\` starting at zero.
+2. **\`for i in range(1, 11):\`**: Generates numbers from \`1\` to \`10\` (the second number in \`range\` is exclusive). In each pass, variable \`i\` takes the next number.
+3. **\`total += i\`**: Adds the current value of \`i\` to \`total\` (\`total = total + i\`).
+4. **\`print(f"Adding {i}, total is now {total}")\`**: Uses an f-string to display the step-by-step running total.
+5. **\`print(f"The final sum is: {total}")\`**: After the loop concludes, prints the final result: **55**.
+
+---
+
+### 💡 Key Takeaways
+- \`range(start, stop)\` stops *before* reaching \`stop\`.
+- \`total += i\` is standard shorthand for accumulating values.`,
+
+        eli5: `### 👶 ELI5: The Piggy Bank Story! 🐖💰
+
+Imagine you have an empty piggy bank labeled **total**. Right now, there are **0 coins** in it.
+
+1. **Day 1**: You drop in **1 coin**. Your bank has **1 coin**! 🪙
+2. **Day 2**: You drop in **2 coins**. Now you have **3 coins**! 🪙🪙
+3. **Day 3**: You drop in **3 coins**. Now you have **6 coins**! 🪙🪙🪙
+4. You keep doing this every day until Day 10.
+5. On Day 10, you open your bank: **55 shiny coins in total!** 🎉
+
+The \`for\` loop is just a little robot helper that drops the coins in for you, counting 1 to 10 without breaking a sweat! 🤖✨`,
+
+        'line-by-line': `### Line 2
+\`\`\`python
+total = 0
+\`\`\`
+**Explanation:** Creates a variable named \`total\` initialized to \`0\`. This will store the running sum.
+
+---
+
+### Line 3
+\`\`\`python
+for i in range(1, 11):
+\`\`\`
+**Explanation:** Starts a loop. \`range(1, 11)\` generates numbers \`1\` through \`10\`. Each number is assigned to \`i\` one by one.
+
+---
+
+### Line 4
+\`\`\`python
+    total += i
+\`\`\`
+**Explanation:** Adds the current value of \`i\` to \`total\`.
+
+---
+
+### Line 5
+\`\`\`python
+    print(f"Adding {i}, total is now {total}")
+\`\`\`
+**Explanation:** Outputs the progress for each loop step using Python's formatted f-string.
+
+---
+
+### Line 7
+\`\`\`python
+print(f"The final sum is: {total}")
+\`\`\`
+**Explanation:** Runs after the loop finishes and prints the final computed sum (\`55\`).`,
+
+        concepts: `### 📦 Variables
+- \`total\`: An integer variable storing the running sum and final answer.
+- \`i\`: The loop counter variable updated on each pass.
+
+---
+
+### 🔄 Loops
+- \`for ... in range(...)\`: An iterator loop that executes a block for each item in a sequence.
+
+---
+
+### ⚙️ Python Features
+- **\`range(1, 11)\`**: Generates an arithmetic progression from 1 up to (but not including) 11.
+- **f-strings (\`f"..."\`)**: String interpolation for embedding expressions inside text.
+- **Augmented Assignment (\`+=\`)**: Adds a value and reassigns in one clean step.`
+    },
+
+    'js-fetch': {
+        explain: `### 📋 Summary
+This JavaScript code defines an asynchronous function \`getUser\` that requests user data from an external REST API, handles potential network or HTTP failures cleanly using a \`try...catch\` block, and logs the user's name to the console.
+
+---
+
+### 🔍 How It Works Step-by-Step
+
+1. **\`async function getUser(userId)\`**: Declares an async function that naturally returns a Promise.
+2. **\`try / catch\`**: Ensures the application does not crash if network requests fail.
+3. **\`await fetch(...)\`**: Dispatches an HTTP GET request to \`https://api.example.com/users/\${userId}\` and pauses until headers return.
+4. **\`if (!response.ok)\`**: Checks if the HTTP status code is outside the 200–299 range (e.g. 404 or 500) and throws an error if so.
+5. **\`await response.json()\`**: Resolves the response stream into a JavaScript object.
+6. **\`getUser(42)\`**: Calls the function with user ID 42.`,
+
+        eli5: `### 👶 ELI5: Ordering Pizza by Phone! 🍕📞
+
+1. **Making the call** (\`fetch\`): You dial the pizzeria to ask for customer #42's order.
+2. **Staying on the line** (\`await\`): You hold the line while the cashier checks the computer.
+3. **Checking the answer** (\`if (!response.ok)\`): Did the cashier find the order, or say "Sorry, no order exists"? If there is an issue, you complain!
+4. **Getting the receipt** (\`response.json\`): The cashier reads out the details to you.
+5. **The Safety Net** (\`catch\`): If the phone line cuts off, you don't panic — you catch the error and print a friendly message. 🛡️`,
+
+        'line-by-line': `### Line 2
+\`\`\`javascript
+async function getUser(userId) {
+\`\`\`
+**Explanation:** Declares an asynchronous function accepting a \`userId\` parameter.
+
+---
+
+### Line 3
+\`\`\`javascript
+    try {
+\`\`\`
+**Explanation:** Starts an error-handling block to catch any network errors or thrown exceptions.
+
+---
+
+### Line 4
+\`\`\`javascript
+        const response = await fetch(\`https://api.example.com/users/\${userId}\`);
+\`\`\`
+**Explanation:** Sends an asynchronous HTTP GET request and waits for the remote server's response.
+
+---
+
+### Lines 6-8
+\`\`\`javascript
+        if (!response.ok) {
+            throw new Error(\`HTTP error! status: \${response.status}\`);
+        }
+\`\`\`
+**Explanation:** Validates that the server returned a 2xx success status code before proceeding.
+
+---
+
+### Line 10
+\`\`\`javascript
+        const userData = await response.json();
+\`\`\`
+**Explanation:** Parses the incoming JSON response body into a JavaScript object.`,
+
+        concepts: `### ⚡ Asynchronous Programming
+- **\`async / await\`**: Modern syntax for handling asynchronous operations cleanly without callback hell.
+- **\`fetch()\`**: The browser standard API for making HTTP requests.
+
+---
+
+### 🛡️ Error Handling
+- **\`try / catch\`**: Protects against uncaught runtime rejections and network failures.
+- **\`throw new Error()\`**: Triggers an error condition when an HTTP status is not successful.`
+    },
+
+    'error-msg': {
+        error: `### 🔍 What the Error Means
+**\`ZeroDivisionError: division by zero\`** means your code attempted to divide a number by **0**, which is mathematically undefined and strictly forbidden in Python.
+
+---
+
+### ❓ Why It Happened
+Look closely at line 8:
+\`\`\`python
+return sum(numbers) / len(numbers)
+\`\`\`
+When \`calculate_average(numbers)\` was called, the \`numbers\` argument was an **empty list** (\`[]\`).
+- \`sum([])\` evaluates to \`0\`
+- \`len([])\` evaluates to \`0\`
+- \`0 / 0\` triggers the **\`ZeroDivisionError\`**!
+
+---
+
+### ✅ How to Fix It
+Add a guard condition before dividing to handle empty lists safely:
+
+\`\`\`python
+def calculate_average(numbers):
+    if not numbers:
+        return 0  # or return None / raise a custom friendly message
+    return sum(numbers) / len(numbers)
+\`\`\`
+
+---
+
+### 💡 Pro Tip
+Whenever calculating an average, percentage, or ratio, always check that the divisor (denominator) is greater than zero! 🛡️`,
+
+        explain: `### 📋 Error Breakdown
+This traceback shows a runtime crash caused by **\`ZeroDivisionError\`** in \`calculate_average\`.
+
+- **Crashing Code:** \`return sum(numbers) / len(numbers)\`
+- **Cause:** An empty list was passed, making \`len(numbers)\` equal to \`0\`.
+
+### 🛠️ Solution
+\`\`\`python
+def calculate_average(numbers):
+    if not numbers:
+        return 0
+    return sum(numbers) / len(numbers)
+\`\`\``,
+
+        eli5: `### 👶 ELI5: Sharing Cookies with Zero Friends! 🍪🚫
+
+Imagine you have 10 cookies, and you want to share them fairly:
+- If you have 2 friends: each gets 5 cookies. Easy!
+- If you have **0 friends** standing there: How many cookies does each friend get?
+It makes no sense because there is nobody to receive them!
+
+In programming, dividing by zero is an impossible question, so Python stops and says **ZeroDivisionError**! 🚨`
+    },
+
+    'java-class': {
+        explain: `### 📋 Summary
+This Java code defines an Object-Oriented class named \`Student\` containing private instance fields for encapsulation, a parameterized constructor for object creation, a business method \`isHonorRoll()\`, and an overridden \`toString()\` method.
+
+---
+
+### 🔍 Key Components
+1. **Encapsulation**: Private fields (\`name\`, \`age\`, \`gpa\`) guard internal state against unintended external modification.
+2. **Constructor**: Initializes a new Student object with custom parameters.
+3. **Logic Method**: \`isHonorRoll()\` evaluates whether \`gpa >= 3.5\`.
+4. **\`@Override toString()\`**: Formats the object into a readable string when printed.`,
+
+        eli5: `### 👶 ELI5: A Student ID Card Factory! 🪪🎒
+Think of the \`Student\` class like a mold or template for creating student ID cards:
+- It records each student's name, age, and grade score (GPA).
+- If their score is 3.5 or higher, a gold star is stamped on: **Honor Roll!** ⭐
+- \`toString()\` reads the card out loud in plain words!`,
+
+        'line-by-line': `### Line 1
+\`\`\`java
+public class Student {
+\`\`\`
+**Explanation:** Defines a public class blueprint named \`Student\`.
+
+---
+
+### Lines 2-4
+\`\`\`java
+private String name;
+private int age;
+private double gpa;
+\`\`\`
+**Explanation:** Defines private fields storing each student's attributes.
+
+---
+
+### Lines 13-15
+\`\`\`java
+public boolean isHonorRoll() {
+    return this.gpa >= 3.5;
+}
+\`\`\`
+**Explanation:** An instance method that returns \`true\` if GPA is at least 3.5.`,
+
+        concepts: `### 🏛️ Object-Oriented Programming (OOP)
+- **Encapsulation**: Using \`private\` fields with controlled access methods.
+- **Constructors**: Setting up object state on instantiation.
+- **Method Overriding**: Customizing \`Object.toString()\` for structured display.`
+    },
+
+    'rust-enum': {
+        explain: `### 📋 Summary
+This Rust snippet defines an algebraic data type (\`enum WebEvent\`) with variants holding different types of payloads (unit, tuple, and struct-like), and uses exhaustive pattern matching (\`match\`) to handle every variant safely at compile time.
+
+---
+
+### 🔍 Key Components
+1. **\`enum WebEvent\`**: Defines 3 distinct variants: \`PageLoad\`, \`KeyPress(char)\`, and \`Click { x, y }\`.
+2. **\`match event\`**: Guarantees all variants are handled without runtime crashes.`,
+
+        eli5: `### 👶 ELI5: A Universal Game Controller! 🎮🕹️
+Imagine a toy controller with different actions:
+- Pressing a button sends a character letter! 🔤
+- Clicking the mouse sends coordinates on screen! 🖱️
+- Loading the page tells the game to start! 🚀
+The \`match\` block is like the game knowing exactly which action was pressed and reacting right away!`,
+
+        'line-by-line': `### Lines 2-6
+\`\`\`rust
+enum WebEvent {
+    PageLoad,
+    KeyPress(char),
+    Click { x: i64, y: i64 },
+}
+\`\`\`
+**Explanation:** Declares an enum where each variant can store distinct types of data.
+
+---
+
+### Lines 8-15
+\`\`\`rust
+match event {
+    WebEvent::PageLoad => println!("page loaded"),
+    ...
+}
+\`\`\`
+**Explanation:** Exhaustive pattern matching over all enum variants.`,
+
+        concepts: `### 🦀 Rust Core Features
+- **Algebraic Data Types (ADTs)**: Enums that can carry structured payloads.
+- **Exhaustive Pattern Matching**: Compiler-enforced verification that all cases are handled.`
+    }
+};
+
+/**
+ * Matches input code against known demo snippets for instant explanation.
+ */
+function findDemoKey(code) {
+    if (!code) return null;
+    const c = code.trim();
+    if (c.includes('range(1, 11)') || c.includes('total = 0') || c.includes('The final sum is')) return 'python-loop';
+    if (c.includes('getUser') || c.includes('api.example.com') || c.includes('fetch(')) return 'js-fetch';
+    if (c.includes('ZeroDivisionError') || c.includes('calculate_average')) return 'error-msg';
+    if (c.includes('class Student') || c.includes('isHonorRoll')) return 'java-class';
+    if (c.includes('enum WebEvent') || c.includes('PageLoad')) return 'rust-enum';
+    return null;
+}
+
+
 // ============ INITIALIZATION ============
 /**
  * Initializes the application.
- * Checks for a saved Groq API key in localStorage.
- * Sets up all necessary DOM event listeners.
- * Performs the initial character count for the code input.
+ * Configures status UI, loads default example for instant testing,
+ * and sets up all event listeners.
  */
 function init() {
-    // Entry point of the application.
-    // Check for API key on startup. If not found, prompt the user.
-    if (!apiKey) {
-        showApiKeyModal();
-    }
-
     // Bind all UI events to their listeners.
     setupEventListeners();
 
     // Initialize the character count display.
     updateCharCount();
+
+    // If code input is empty on first load, pre-populate the Python loop example
+    // so any visitor can test "Explain" immediately with zero setup!
+    if (!elements.codeInput.value.trim()) {
+        loadExample('python-loop');
+    }
+
+    // Update the API status pill in the header
+    updateApiStatusUi();
 
     // Set the current year in the footer.
     const yearEl = document.getElementById('current-year');
@@ -334,8 +669,6 @@ function init() {
 
 /**
  * Attaches event listeners to all interactive DOM elements.
- * Handles mode switching, API calls, clearing input, copying results,
- * character counting, example loading, and keyboard shortcuts.
  */
 function setupEventListeners() {
     setupModeListeners();
@@ -381,6 +714,7 @@ function setupActionListeners() {
             if (confirm('Are you sure you want to reset and delete your stored API key?')) {
                 localStorage.removeItem('groq_api_key');
                 apiKey = '';
+                updateApiStatusUi();
                 showApiKeyModal();
                 showToast('🔑 API key reset');
             }
@@ -404,18 +738,39 @@ function setupInputListeners() {
 }
 
 function setupModalListeners() {
-    elements.btnSaveKey.addEventListener('click', saveApiKey);
-    elements.apiKeyInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') saveApiKey();
-    });
+    if (elements.btnSaveKey) {
+        elements.btnSaveKey.addEventListener('click', saveApiKey);
+    }
+    if (elements.apiKeyInput) {
+        elements.apiKeyInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') saveApiKey();
+        });
+    }
+    if (elements.btnCloseModal) {
+        elements.btnCloseModal.addEventListener('click', closeApiKeyModal);
+    }
+    if (elements.btnTryDemo) {
+        elements.btnTryDemo.addEventListener('click', () => {
+            closeApiKeyModal();
+            showToast('⚡ In Demo Mode: Click any example chip below to test!');
+        });
+    }
+    if (elements.btnStatus) {
+        elements.btnStatus.addEventListener('click', showApiKeyModal);
+    }
+    if (elements.apiKeyModal) {
+        elements.apiKeyModal.addEventListener('click', (e) => {
+            if (e.target === elements.apiKeyModal) {
+                closeApiKeyModal();
+            }
+        });
+    }
 }
 
 
 // ============ MODE SWITCHING ============
 /**
  * Switches the active explanation mode.
- * Updates the UI tabs, title, description, and placeholder text
- * based on the selected mode (e.g., 'explain', 'eli5', 'error').
  * 
  * @param {string} mode - The mode identifier to switch to.
  */
@@ -431,8 +786,10 @@ function switchMode(mode) {
 
     // Update UI text
     const config = modeConfigs[mode];
-    elements.inputTitle.textContent = config.title;
-    elements.modeDescText.textContent = config.description;
+    if (config) {
+        elements.inputTitle.textContent = config.title;
+        elements.modeDescText.textContent = config.description;
+    }
 
     // If switching to error mode, update placeholder
     if (mode === 'error') {
@@ -445,7 +802,6 @@ function switchMode(mode) {
 // ============ EXAMPLE LOADING ============
 /**
  * Loads a predefined code example into the input area.
- * Automatically switches the mode if an error example is selected.
  * 
  * @param {string} exampleKey - The key identifying the example to load.
  */
@@ -473,16 +829,13 @@ function loadExample(exampleKey) {
 
     // Visual feedback
     elements.codeInput.focus();
-    showToast('✨ Example loaded! Click Explain to see the magic');
+    showToast('✨ Example loaded! Click Explain to see the breakdown');
 }
 
 // ============ MAIN EXPLAIN HANDLER ============
 /**
  * Main handler for the "Explain" button click.
- * Validates the input and API key, determines the selected programming language,
- * constructs the appropriate prompt based on the current mode, and
- * makes an asynchronous call to the Groq API to retrieve the explanation.
- * It also handles UI loading states and errors.
+ * Handles both Live Groq AI requests and zero-friction Demo Mode.
  */
 function getCacheKey(code, mode, lang) {
     const str = `${mode}_${lang}_${code}`;
@@ -503,16 +856,42 @@ async function handleExplain() {
         return;
     }
 
-    if (!apiKey) {
-        showApiKeyModal();
-        return;
-    }
-
     // Get language
     let lang = elements.languageSelect.value;
     if (lang === 'auto') lang = 'the detected programming language';
 
-    // Check cache
+    const config = modeConfigs[currentMode];
+    elements.outputTitle.textContent = config.outputTitle;
+
+    // Check if there is an instant Demo Mode explanation for this snippet
+    const demoKey = findDemoKey(code);
+
+    // CASE 1: No API key provided, but user is testing a sample or known demo
+    if (!apiKey) {
+        if (demoKey && DEMO_EXPLANATIONS[demoKey]) {
+            const demoModeKey = DEMO_EXPLANATIONS[demoKey][currentMode] ? currentMode : 'explain';
+            const demoText = DEMO_EXPLANATIONS[demoKey][demoModeKey];
+            
+            if (demoText) {
+                setLoading(true);
+                showOutput('');
+                setTimeout(() => {
+                    setLoading(false);
+                    const demoBanner = `> ⚡ **Demo Mode Active**: You are viewing an instant pre-computed breakdown. To analyze your own custom code with live Groq Llama 3.3 70B, <a href="javascript:void(0)" onclick="showApiKeyModal()">click here to enter a free Groq API key</a>.\n\n`;
+                    renderOutput(demoBanner + demoText);
+                    showToast('⚡ Instant explanation ready!');
+                }, 500);
+                return;
+            }
+        }
+
+        // Custom code pasted without an API key -> Prompt user with friendly modal
+        showApiKeyModal();
+        showToast('💡 Enter your free Groq API key for custom code, or pick any sample chip above for Demo Mode!');
+        return;
+    }
+
+    // CASE 2: User has entered a Groq API Key -> Call Live AI
     const cacheKey = getCacheKey(code, currentMode, lang);
     let cache = {};
     try {
@@ -520,9 +899,6 @@ async function handleExplain() {
     } catch (e) {
         console.error('Failed to parse cache:', e);
     }
-
-    const config = modeConfigs[currentMode];
-    elements.outputTitle.textContent = config.outputTitle;
 
     if (cache[cacheKey]) {
         showToast('⚡ Loaded from cache!');
@@ -563,9 +939,9 @@ async function handleExplain() {
         if (error.message.includes('Invalid API') || error.message.includes('invalid_api_key') || error.message.includes('401')) {
             errorMsg += 'Your API key seems invalid. Please check it and try again.\n\n';
             errorMsg += '**Get a free key from:** [console.groq.com/keys](https://console.groq.com/keys)';
-            // Reset key
             localStorage.removeItem('groq_api_key');
             apiKey = '';
+            updateApiStatusUi();
         } else if (error.message.includes('rate') || error.message.includes('429')) {
             errorMsg += '⏳ You\'ve hit the API rate limit. Please wait 30-60 seconds and try again.\n\n';
             errorMsg += 'Groq free tier allows ~30 requests per minute.';
@@ -583,11 +959,9 @@ async function handleExplain() {
 // ============ GROQ API CALL ============
 /**
  * Makes an asynchronous POST request to the Groq API.
- * Uses the Llama 3.3 model to generate code explanations.
  * 
  * @param {string} prompt - The formatted prompt string to send to the AI model.
- * @returns {Promise<string>} A promise that resolves to the generated explanation text.
- * @throws {Error} Throws an error if the API request fails (e.g., invalid key, rate limit).
+ * @returns {Promise<string>}
  */
 async function callGroqAPI(prompt) {
     const response = await fetch(GROQ_API_URL, {
@@ -600,12 +974,10 @@ async function callGroqAPI(prompt) {
             model: GROQ_MODEL,
             messages: [
                 {
-                    // System message sets the behavior and persona of the AI.
                     role: 'system',
                     content: 'You are a helpful coding teacher who explains code in a clear, beginner-friendly way. Always use markdown formatting in your responses.'
                 },
                 {
-                    // User message contains the actual prompt constructed based on the mode.
                     role: 'user',
                     content: prompt
                 }
@@ -630,7 +1002,6 @@ async function callGroqAPI(prompt) {
 
     const data = await response.json();
 
-    // Extract text from Groq response (OpenAI-compatible format)
     const text = data?.choices?.[0]?.message?.content;
     if (!text) {
         throw new Error('No response generated. Please try again.');
@@ -641,61 +1012,40 @@ async function callGroqAPI(prompt) {
 
 // ============ RENDERING ============
 /**
- * Parses and renders Markdown text into HTML.
- * Uses Marked.js for markdown parsing and highlight.js for syntax highlighting
- * within code blocks. Safely injects the parsed HTML into the output section.
+ * Parses and renders Markdown text into HTML with syntax highlighting.
  * 
  * @param {string} markdownText - The raw markdown text from the AI response.
  */
 function renderOutput(markdownText) {
     elements.outputSection.style.display = 'block';
 
-    // Configure marked for safe rendering and syntax highlighting.
     marked.setOptions({
         highlight: function(code, lang) {
-            // If the language is detected and supported by highlight.js, use it.
             if (lang && hljs.getLanguage(lang)) {
                 return hljs.highlight(code, { language: lang }).value;
             }
-            // Otherwise, auto-detect the language.
             return hljs.highlightAuto(code).value;
         },
-        breaks: true, // Convert \n to <br>
-        gfm: true,    // Enable GitHub Flavored Markdown
+        breaks: true,
+        gfm: true,
     });
 
-    // Render markdown to HTML
     const html = marked.parse(markdownText);
     elements.outputContent.innerHTML = html;
 
-    // Highlight any code blocks
     elements.outputContent.querySelectorAll('pre code').forEach((block) => {
         hljs.highlightElement(block);
     });
 
-    // Smooth scroll to output
     elements.outputSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-/**
- * Displays the output section with the provided content.
- * Used primarily to show loading states or fallback messages before the
- * markdown is fully rendered.
- * 
- * @param {string} [content] - Optional HTML content to display.
- */
 function showOutput(content) {
     elements.outputSection.style.display = 'block';
     elements.outputContent.innerHTML = content || '<p style="color: var(--text-muted); text-align: center;"><span class="spinner"></span> Thinking... this may take a few seconds</p>';
 }
 
 // ============ UI HELPERS ============
-/**
- * Toggles the UI loading state.
- * Disables the explain button and shows a loading spinner during API calls.
- * 
- * @param {boolean} loading - True to show loading state, false to hide it.
- */
 function setLoading(loading) {
     isLoading = loading;
     const btnText = elements.btnExplain.querySelector('.btn-text');
@@ -706,16 +1056,11 @@ function setLoading(loading) {
     btnLoading.style.display = loading ? 'inline-flex' : 'none';
 }
 
-/**
- * Updates the character and word count display based on the current code input.
- * Triggered on every input event in the code textarea.
- */
 function updateCharCount() {
     const text = elements.codeInput.value.trim();
     const length = elements.codeInput.value.length;
     elements.charCount.textContent = length;
     
-    // Add character limit warning
     if (length > 5000) {
         elements.charCount.classList.add('exceeded');
         elements.charCount.textContent = length + ' (Exceeds recommended limit!)';
@@ -723,21 +1068,13 @@ function updateCharCount() {
         elements.charCount.classList.remove('exceeded');
     }
     
-    // Count words: split by whitespace and filter out empty strings
     const words = text ? text.split(/\s+/).length : 0;
     if (elements.wordCount) {
         elements.wordCount.textContent = words;
     }
 }
 
-/**
- * Displays a temporary toast notification message on the screen.
- * The toast automatically disappears after 3 seconds.
- * 
- * @param {string} message - The text message to display in the toast.
- */
 function showToast(message) {
-    // Remove existing toast
     const existingToast = document.querySelector('.toast');
     if (existingToast) existingToast.remove();
 
@@ -746,32 +1083,42 @@ function showToast(message) {
     toast.textContent = message;
     document.body.appendChild(toast);
 
-    // Trigger animation
     requestAnimationFrame(() => {
         toast.classList.add('show');
     });
 
-    // Remove after 3s
     setTimeout(() => {
         toast.classList.remove('show');
         setTimeout(() => toast.remove(), 300);
     }, 3000);
 }
 
+function updateApiStatusUi() {
+    if (!elements.btnStatus || !elements.statusText) return;
+    if (apiKey) {
+        elements.btnStatus.classList.add('connected');
+        elements.statusText.textContent = '✅ Groq AI Active (Llama 3.3)';
+        elements.btnStatus.title = 'Click to manage your Groq API key';
+    } else {
+        elements.btnStatus.classList.remove('connected');
+        elements.statusText.textContent = '⚡ Instant Demo Mode (Click for Custom Groq AI)';
+        elements.btnStatus.title = 'Click to add a free Groq API key for custom code';
+    }
+}
+
 // ============ API KEY MANAGEMENT ============
-/**
- * Displays the modal dialogue prompting the user to enter their Groq API key.
- * Automatically focuses the input field for convenience.
- */
 function showApiKeyModal() {
     elements.apiKeyModal.style.display = 'flex';
+    if (apiKey) {
+        elements.apiKeyInput.value = apiKey;
+    }
     setTimeout(() => elements.apiKeyInput.focus(), 100);
 }
 
-/**
- * Validates and saves the entered Groq API key to localStorage.
- * Dismisses the modal and shows a success toast upon successful save.
- */
+function closeApiKeyModal() {
+    elements.apiKeyModal.style.display = 'none';
+}
+
 function saveApiKey() {
     const key = elements.apiKeyInput.value.trim();
 
@@ -782,16 +1129,17 @@ function saveApiKey() {
 
     apiKey = key;
     localStorage.setItem('groq_api_key', key);
-    elements.apiKeyModal.style.display = 'none';
-    showToast('🔑 API key saved! You\'re ready to go');
+    closeApiKeyModal();
+    updateApiStatusUi();
+    showToast('🔑 API key saved! Live AI activated');
+
+    // If code is present, automatically trigger explanation
+    if (elements.codeInput.value.trim()) {
+        handleExplain();
+    }
 }
 
-// ============ COPY FUNCTIONALITY ============
-/**
- * Copies the current explanation content to the user's clipboard.
- * Uses the modern navigator.clipboard API with a fallback mechanism
- * using document.execCommand('copy') for older browsers.
- */
+// ============ COPY & DOWNLOAD FUNCTIONALITY ============
 function copyExplanation() {
     const text = elements.outputContent.innerText;
 
@@ -805,7 +1153,6 @@ function copyExplanation() {
     };
 
     navigator.clipboard.writeText(text).then(setCopySuccess).catch(() => {
-        // Fallback
         const textarea = document.createElement('textarea');
         textarea.value = text;
         document.body.appendChild(textarea);
@@ -816,10 +1163,6 @@ function copyExplanation() {
     });
 }
 
-// ============ DOWNLOAD FUNCTIONALITY ============
-/**
- * Downloads the current explanation content as a Markdown (.md) file.
- */
 function downloadExplanation() {
     const text = elements.outputContent.innerText;
     if (!text) {
@@ -831,7 +1174,6 @@ function downloadExplanation() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     
-    // Generate filename based on current mode and date
     const dateStr = new Date().toISOString().slice(0, 10);
     link.href = url;
     link.setAttribute('download', `explanation-${currentMode}-${dateStr}.md`);

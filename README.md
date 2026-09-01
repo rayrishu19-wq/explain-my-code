@@ -2,7 +2,13 @@
 
 An AI-powered web app that explains code in beginner-friendly language. Just paste your code, pick a mode, and get instant explanations!
 
-![Explain My Code Screenshot](https://img.shields.io/badge/Status-Live-brightgreen) ![HTML](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black) ![Groq](https://img.shields.io/badge/Powered_by-Groq_AI-orange)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-rayrishu19--wq.github.io%2Fexplain--my--code-06d6a0?style=for-the-badge&logo=googlechrome&logoColor=white)](https://rayrishu19-wq.github.io/explain-my-code/)
+
+![Status](https://img.shields.io/badge/Status-Live-brightgreen) ![HTML](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black) ![Groq](https://img.shields.io/badge/Powered_by-Groq_AI-orange)
+
+> 🚀 **Direct Live Access**: You can test the app immediately online at [**rayrishu19-wq.github.io/explain-my-code**](https://rayrishu19-wq.github.io/explain-my-code/).
+> - **Demo Mode**: Test all sample snippets (Python Loop, JS Fetch, Java Class, Rust Enum, Python Error, etc.) across all 5 modes with zero API key needed.
+> - **Live AI Mode**: Enter a free Groq API key from [console.groq.com/keys](https://console.groq.com/keys) to analyze your own custom code in real time with Llama 3.3 70B!
 
 ## ✨ Features
 
@@ -13,21 +19,19 @@ An AI-powered web app that explains code in beginner-friendly language. Just pas
 | 📝 **Line-by-Line** | Every single line explained individually |
 | 🔑 **Key Concepts** | Highlights loops, functions, variables, conditionals |
 | ❌ **Error Mode** | Paste an error → get what went wrong & how to fix it |
-| 🎧 **Vibe Coding** | Optimized for the modern "Builder" workflow .|
+| 🎧 **Vibe Coding** | Optimized for the modern "Builder" workflow |
 
-## 🚀 Quick Start
+## 🚀 Quick Start (Local)
 
 1. **Clone the repo**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/explain-my-code.git
+   git clone https://github.com/rayrishu19-wq/explain-my-code.git
    cd explain-my-code
    ```
 
-2. **Get a free Groq API key** from [console.groq.com/keys](https://console.groq.com/keys)
+2. **Open `index.html`** in your browser (just double-click it!)
 
-3. **Open `index.html`** in your browser (just double-click it!)
-
-4. **Paste your API key** when prompted → Start explaining! 🎉
+3. **Explore immediately** using built-in Demo Mode, or paste your free Groq API key from [console.groq.com/keys](https://console.groq.com/keys) for custom code! 🎉
 
 ## 🎨 Design
 
